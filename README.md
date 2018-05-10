@@ -3,7 +3,7 @@
 TFA - Java Sources of a full example of Java Web app
 JSF Application, well comments, quality sources 
 
-# Java Sources
+### Java Sources
 
 Sources : the 6 steps of developpement 
     
@@ -30,18 +30,18 @@ Sources : the 6 steps of developpement
          | JAAS | Authentication | Security roles 
 		 | Service mail | Pdf generation
 	 
-# Docs 
+### Docs 
    see https://tfa.onmypc.net   
    
-# Build
+### Build
 
    into each tickets-x dir :   mvn clean install , mvn install -P embed
       
-# Configuration 
+### Configuration 
 
    see sources /etc
 
-# Deploy 
+### Deploy 
 
    - war on jetty, tomcat or wilfly servlet only
    - java -jar embedded.war   (jetty embedded) 
