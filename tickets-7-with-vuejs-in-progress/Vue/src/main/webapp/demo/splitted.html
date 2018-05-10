@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<html lang="en">
+
+   <!-- splitter demo page -->
+   
+   <head>
+   
+      <title>Tickets</title>
+   
+      <meta charset="ISO-8859-1" />
+      <link rel="shortcut icon" href="../favicon.png" />
+   
+      <link rel="stylesheet" href="../resources/css/layout.css" />
+      <link rel="stylesheet" href="../resources/css/splitter.css" />
+    
+   </head>
+   
+   <body>
+   
+      <!-- Splitted and Resizable 100% LAYOUT -->
+   
+      <header id="header" style="background-color:orange">
+         <div style="padding:10px">The header</div>
+      </header>  
+   
+      <div id="wrapper">
+   
+         <aside id="aside"  style="background-color:green">
+            <div style="padding:10px">The aside</div>          
+         </aside>
+
+		 <!-- vertical splitter -->
+         <div id="vsplitter"  style="background-color:red"></div>
+       
+         <section id="main" style="background-color:violet"  >
+         
+            <div id="list" style="background-color:yellow; box-shadow: inset 0 0 0px 6px blue">
+               <div style="padding:10px">The list</div>
+            </div>
+
+			<!-- horizontal splitter -->
+            <div id="hsplitter"  style="background-color:red"></div>
+            
+            <div id="detail" style="background-color:lightblue; box-shadow: inset 0 0 0px 6px blue">
+               <div style="padding:10px">The detail,  splitter demo : drag the red lines !!!</div>
+            </div>
+         
+         </section>
+   
+      </div>
+   
+      <footer id="footer"  style="background-color:grey">
+         <span  style="padding:10px">The footer</span>
+      </footer>
+   
+      <script src="../resources/js/splitter.js"></script>
+   
+   </body>
+
+</html>
+

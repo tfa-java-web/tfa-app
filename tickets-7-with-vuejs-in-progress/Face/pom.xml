@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- inherited pom -->
+	<parent>
+		<groupId>tfa</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>tickets</artifactId>
+	</parent>
+
+	<!-- identifier for this module -->
+	<artifactId>tickets-face</artifactId>
+
+	<description>
+      	An application managing tickets - Core module
+    </description>
+
+	<dependencies>
+
+		<!-- Module dependency : software layer below -->
+		<dependency>
+			<groupId>tfa</groupId>
+			<artifactId>tickets-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+        <dependency>
+            <groupId>tfa</groupId>
+            <artifactId>tickets-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+ 
+        <!-- JSF to build GUI -->
+        
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+				
+		<dependency>
+           <groupId>com.sun.faces</groupId>
+           <artifactId>jsf-impl</artifactId>
+           <version>${jsf.version}</version>
+		</dependency>
+
+		<!-- Servlet, JSP -->
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>el-impl</artifactId>
+			<version>2.2</version>
+		</dependency>
+
+        <!-- resources web -->
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>${font-awesome.version}</version>
+        </dependency>
+	
+		<!-- Log on logback -->
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

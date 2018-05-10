@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- inherited pom -->
+	<parent>
+		<groupId>tfa</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>tickets</artifactId>
+	</parent>
+
+	<!-- identifier for this module -->
+	<artifactId>tickets-core</artifactId>
+
+	<description>
+      	An application managing tickets - Core module
+    </description>
+
+	<dependencies>
+
+		<!-- Module dependency : software layer below -->
+		<dependency>
+			<groupId>tfa</groupId>
+			<artifactId>tickets-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- CDI by weld
+		
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+ 
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>2.4.5.Final</version>
+		</dependency>
+        -->
+ 
+        <!-- Servlet -->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    
+		<!-- security --> 
+		<dependency>
+			<groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
+			<artifactId>owasp-java-html-sanitizer</artifactId>
+			<version>r239</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.cage</groupId>
+			<artifactId>cage</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.11</version>
+		</dependency>
+
+<!-- 
+		<dependency>
+		    <groupId>org.commonjava.googlecode.markdown4j</groupId>
+		    <artifactId>markdown4j</artifactId>
+		    <version>2.2-cj-1.1</version>
+		</dependency>
+ -->
+ 
+        <!-- mail -->
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>     
+  
+        <!-- pdf -->
+        
+		<dependency>
+		  <groupId>org.apache.pdfbox</groupId>
+		  <artifactId>pdfbox</artifactId>
+		  <version>2.0.9</version>
+		  <exclusions>
+		  	<exclusion>
+                <!-- already managed by jcl-over-slf4j  -->
+		  		<groupId>commons-logging</groupId>
+		  		<artifactId>commons-logging</artifactId>
+		  	</exclusion>
+		  </exclusions>
+		</dependency>
+		
+		<!-- Log on logback -->
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>

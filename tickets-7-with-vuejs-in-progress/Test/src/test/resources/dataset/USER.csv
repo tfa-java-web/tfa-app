@@ -1,0 +1,6 @@
+IDENT, FULLNAME, MAIL
+"admin", "Super Administrator", "tfa.java.web@gmail.com"
+"tfa", "The French Author", "tfa.java.web@gmail.com"
+"test", "Test person", "test@gmail.com"
+"guest", "The Guest", "guest@gmail.com"
+"someone", "Someone", "someone@gmail.com"

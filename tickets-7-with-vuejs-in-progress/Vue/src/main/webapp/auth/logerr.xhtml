@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<!-- based on authentication page template  -->
+
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" >
+
+    <!-- main panel of the page -->
+    <ui:define name="content">
+
+        <div style="padding: 30px">
+
+            <div class="centerPanel" style="text-align: center">
+
+                <h2 style="color: red">Authentication failed !</h2>
+                <br />
+                <hr />
+                <!-- Button to return to login page -->
+                <div class="buttons">
+                    <h:button outcome="login" value="Try again" />
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+
+

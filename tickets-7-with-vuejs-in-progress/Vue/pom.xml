@@ -1,0 +1,195 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- inherited pom -->
+	<parent>
+		<groupId>tfa</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>tickets</artifactId>
+	</parent>
+
+	<!-- identifier for this module -->
+	<artifactId>tickets-vue</artifactId>
+
+	<!-- packaging for java webapp -->
+	<packaging>war</packaging>
+
+	<description>
+      	An application managing tickets - GUI Layer, build on VUE.JS
+    </description>
+
+	<properties>
+
+		<!-- webjars resources versions for filtering -->
+		
+		<jquery.version>3.3.1-1</jquery.version>
+<!-- 		<jquery-ui.version>1.12.1</jquery-ui.version> -->
+		<!-- <datatables.version>1.10.16</datatables.version> -->
+<!-- 		<bootstrap.version>4.0.0</bootstrap.version> -->
+		<vue.version>2.5.16</vue.version>
+		<vue-router.version>3.0.1</vue-router.version>
+		<!-- <bootstrap-vue.version>2.0.0-rc.1</bootstrap-vue.version> -->
+		<font-awesome.version>4.7.0</font-awesome.version>
+
+        <!-- default : not minified -->
+		<minified.suffix></minified.suffix>
+		
+		<webappdir>${basedir}/src/main/webapp</webappdir>
+		
+	</properties>
+
+	<dependencies>
+
+        <!-- Module dependency : software layer below -->
+        <dependency>
+            <groupId>tfa</groupId>
+            <artifactId>tickets-rest</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
+        <!-- javascript & css integration  -->
+        
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
+		</dependency>
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.webjars</groupId> -->
+<!-- 			<artifactId>jquery-ui</artifactId> -->
+<!-- 			<version>${jquery-ui.version}</version> -->
+<!-- 		</dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.webjars</groupId> -->
+		<!-- <artifactId>datatables</artifactId> -->
+		<!-- <version>${datatables.version}</version> -->
+		<!-- </dependency> -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.webjars</groupId> -->
+<!-- 			<artifactId>bootstrap</artifactId> -->
+<!-- 			<version>${bootstrap.version}</version> -->
+<!-- 		</dependency> -->
+
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>vue</artifactId>
+			<version>${vue.version}</version>
+		</dependency>
+		
+        <dependency>
+		    <groupId>org.webjars.bower</groupId>
+		    <artifactId>vue-router</artifactId>
+            <version>${vue-router.version}</version>
+		</dependency>
+		
+		<!-- <dependency> -->
+		<!-- <groupId>org.webjars.npm</groupId> -->
+		<!-- <artifactId>bootstrap-vue</artifactId> -->
+		<!-- <version>${bootstrap-vue.version}</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>${font-awesome.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<!-- Context root ( http://localhost:8080/vues ) -->
+		<finalName>/vues</finalName>
+
+		<plugins>
+
+			<!-- Less to css -->
+			<plugin>
+				<groupId>org.lesscss</groupId>
+				<artifactId>lesscss-maven-plugin</artifactId>
+				<version>1.7.0.1.1</version>
+				<executions>
+					<execution>
+						<id>to-webapp</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${basedir}/src/main/less</sourceDirectory>
+							<outputDirectory>${webappdir}/resources/css</outputDirectory>
+							<compress>true</compress>
+						</configuration>
+					</execution>
+					<execution>
+						<id>wtp-workaround</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${basedir}/src/main/less</sourceDirectory>
+							<outputDirectory>${project.build.directory}/m2e-wtp/web-resources/resources/css</outputDirectory>
+							<compress>false</compress>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- filtering : dependencies for dev or production -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+                    <webResources>
+                        <!-- filtering : webjars dependencies -->
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>${webappdir}</directory>
+                            <includes>
+                                <include>resources/webjars.html</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <filtering>false</filtering>
+                            <directory>${webappdir}</directory>
+                            <excludes>
+                                <exclude>resources/webjars.html</exclude>
+                            </excludes>
+                        </resource>
+					</webResources>
+				</configuration>
+			</plugin> 
+
+            <!-- During release:prepare & perform, enable the "release" profile -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<releaseProfiles>release</releaseProfiles>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<profiles>
+
+        <!-- the "release" profile : minified version for css, js -->
+		<profile>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>  
+			<properties>
+				<minified.suffix>.min</minified.suffix>
+			</properties>	
+		</profile>
+		
+	</profiles>
+
+</project>

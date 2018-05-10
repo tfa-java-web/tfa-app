@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- For Wildfly only -->
+
+<jboss-web>
+
+  <security-domain>TicketRealm</security-domain>
+    
+</jboss-web>
+
+<!--  Put this into configuration/standalone.xml of wildfly server!  
+
+                <security-domain name="TicketRealm" cache-type="default">
+                    <authentication>
+                        <login-module code="tfa.tickets.auth.TfaLoginModule" flag="required">
+                            <module-option name="configPath" value="./etc/realm.properties"/>
+                            <module-option name="debug" value="false"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+-->
