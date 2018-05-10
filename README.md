@@ -1,7 +1,7 @@
 # tfa-app
 
 TFA - Java Sources of a full example of Java Web app
-JSF Application, well comments, quality sources 
+**JSF Application**, well comments, quality sources 
 
 ### Java Sources
 
@@ -46,7 +46,7 @@ Sources : the 6 steps of developpement
    - war on jetty, tomcat or wilfly servlet only
    - java -jar embedded.war   (jetty embedded) 
 		 
-Note : Login for the tickets application at step 6 : admin/admin  or  guest/guest
+> Note : Login for the tickets application at step 6 : admin/admin  or  guest/guest
                     
 # Vue.js version in progress
 
