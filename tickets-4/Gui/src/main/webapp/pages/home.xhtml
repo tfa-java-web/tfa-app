@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:tfa="http://java.sun.com/jsf/composite/tfa">
+
+<h:head>
+
+  <title>Tickets</title>
+
+  <meta charset="ISO-8859-1" />
+
+  <!-- Minimal gui style -->
+  <h:outputStylesheet name="css/theme.css" />
+  <h:outputStylesheet name="css/dialog.css" />
+
+  <!-- Minimal js script -->
+  <h:outputScript name="js/tools.js" target="body" />
+
+  <!-- map id of current ticket into query string to beans -->
+  <f:metadata>
+    <f:viewParam name="id" value="#{ticketDetail.param}" />
+    <f:viewParam name="id" value="#{ticketEdition.param}" />
+  </f:metadata>
+
+</h:head>
+
+<h:body>
+
+  <!-- to open modification page for new ticket-->
+  <h:button outcome="./home.xhtml" value="Submit" />
+
+  <!-- Main form to manage list and ticket displaying -->
+  <h:form id="tf">
+
+    <!-- Ticket table panel -->
+    <h1>TicketsTable Bean</h1>
+    <h:panelGroup id="liste" >
+
+      <!-- table (list of tickets lines), with js rowClick raising jsf rowAction below -->
+      <h:dataTable id="tickets" value="#{ticketsTable.list}" var="o" rowClasses="rowClass"
+        onclick="return rowClick(event);" rows="#{ticketsTable.pageSize}" style="width:100%">
+
+        <!-- ticket id column -->
+        <h:column>
+
+          <f:facet name="header">
+
+            <!-- header button to sort on id -->
+            <h:commandLink action="#{ticketsTable.sort('id')}">
+              <input type="button" value="id" />
+              <f:ajax immediate="true" render="@form" />
+            </h:commandLink>
+
+            <!-- button to open group action dialog on selected tickets -->
+            <h:commandLink action="#{groupAction.actionChoice(ticketsTable.selection)}">
+              <input type="button" value="group action" />
+              <f:ajax execute="tf:tickets" render="group:Form:View" />
+            </h:commandLink>
+
+          </f:facet>
+
+          <!-- hidden action called from js rowClick, to show the corresponding ticket detail -->
+          <h:commandLink id="rowAction" action="#{ticketsTable.click}">
+            <f:ajax immediate="true" render="tf:detail" />
+          </h:commandLink>
+
+          <!-- toggles for selected tickets -->
+          <h:selectBooleanCheckbox id="tg" value="#{ticketsTable.selected}" />
+
+          <!-- id of ticket, associated to toggle -->
+          <h:outputLabel for="tg" value="#{o.id}" />
+
+        </h:column>
+
+        <!-- ticket status column -->
+        <h:column>
+
+          <f:facet name="header">
+            <!-- header button to sort on status -->
+            <h:commandLink action="#{ticketsTable.sort('status')}">
+              <input type="button" value="status" />
+              <f:ajax immediate="true" render="@form" />
+            </h:commandLink>
+          </f:facet>
+
+          <!-- status of ticket -->
+          <h:outputText value="#{(o.status.isEmpty()?'&#160;':o.status)}" />
+
+        </h:column>
+
+        <!-- ticket user-assigned column -->
+        <h:column>
+
+          <f:facet name="header">
+            <!-- header button to sort on username -->
+            <h:commandLink action="#{ticketsTable.sort('user')}">
+              <input type="button" value="user" />
+              <f:ajax immediate="true" render="@form" />
+            </h:commandLink>
+          </f:facet>
+
+          <!-- user-assigned of ticket -->
+          <h:outputText value="#{o.user}" />
+
+        </h:column>
+
+        <!-- ticket last-update-date column -->
+        <h:column>
+
+          <f:facet name="header">
+            <!-- header button to sort on date -->
+            <h:commandLink action="#{ticketsTable.sort('date')}">
+              <input type="button" value="date" />
+              <f:ajax immediate="true" render="@form" />
+            </h:commandLink>
+          </f:facet>
+
+          <!-- date of ticket, with compact format -->
+          <h:outputText value="#{o.date}">
+            <f:convertDateTime pattern="dd MMM" />
+          </h:outputText>
+
+        </h:column>
+
+        <!-- ticket title column -->
+        <h:column>
+
+          <f:facet name="header">
+          
+            <!-- header button (no action) -->
+            <input type="button" value="title" />
+
+            <!-- header right align : two buttons Prev and Next page-->
+            <span style="float: right;">
+            
+              <h:commandLink action="#{ticketsTable.prevPage}">
+                <input type="button" value="previous page" />
+                <f:ajax execute="tf:tickets" render="@form" />
+              </h:commandLink>
+              
+              <!-- info on current page and total pages -->
+              <h:outputText value="#{ticketsTable.page+1} / #{ticketsTable.nbPage}" />
+              
+              <h:commandLink action="#{ticketsTable.nextPage}">
+                <input type="button" value="next page" />
+                <f:ajax execute="tf:tickets" render="@form" />
+              </h:commandLink>
+              
+            </span>
+
+          </f:facet>
+
+          <!-- title of ticket -->
+          <h:outputText value="#{o.title}" />
+
+        </h:column>
+
+      </h:dataTable>
+
+    </h:panelGroup>
+
+    <hr />
+
+    <!-- Ticket detail panel -->
+    <h1>TicketDetail Bean</h1>
+    <h:panelGroup id="detail">
+
+      <!-- Title rectangle -->
+      <div id="rtitle"  style="background-color:lightgrey; padding:15px" >
+
+        <!-- into rectangle right align : two buttons Prev and Next ticket -->
+        <span style="float: right;">
+        
+          <h:commandLink action="#{ticketsTable.prev}">
+            <input type="button" value="previous"/>
+            <f:ajax execute="#{ticketsTable.index==0 ? 'tf:tickets' : ''}"
+              render="#{ticketsTable.index==0 ? '@form' : 'tf:detail'}" />
+          </h:commandLink>
+          
+          <h:commandLink action="#{ticketsTable.next}">
+            <input type="button" value="next"/>
+            <f:ajax execute="#{ticketsTable.index==(ticketsTable.pageSize-1) ? 'tf:tickets' : ''}"
+              render="#{ticketsTable.index==(ticketsTable.pageSize-1) ? '@form' : 'tf:detail'}" />
+          </h:commandLink>
+          
+        </span>
+
+        <!-- Id and title of current ticket into rectangle -->
+        <h:panelGroup rendered="#{ticketDetail.current != null}">
+          <span id="leid">
+            <h:outputText id="t-id" value="#{ticketDetail.current.id}" />
+          </span>
+          &#160;
+          <span id="letitre">
+            <h:outputText id="t-title" value="#{ticketDetail.current.title}" />
+          </span>
+        </h:panelGroup>
+
+      </div>
+
+      <!-- under title rectangle -->
+      <h:panelGroup rendered="#{ticketDetail.current != null}" >
+
+        <!-- buttons bar of actions on tickets -->
+        <nav id="actions">
+
+          <!-- to change assignement -->
+          <span>Assign to :</span>
+          <h:selectOneMenu id="assign" value="#{ticketDetail.current.user}" valueChangeListener="#{ticketDetail.reAssign}">
+            <f:selectItems value="#{ticketDetail.users}" var="u" itemValue="#{u.ident}" itemLabel="#{u.fullName}" />
+            <f:ajax render="tf:tickets"/>
+          </h:selectOneMenu>
+
+          <!-- to change status -->
+          <span>Status :</span>
+          <h:selectOneMenu id="statut" value="#{ticketDetail.current.status}" valueChangeListener="#{ticketDetail.updateStatus}">
+            <f:selectItems value="#{ticketDetail.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+            <f:ajax render="tf:tickets"/>
+          </h:selectOneMenu>
+
+          <!-- info on last updated date  -->
+          <h:outputText value="Date : #{ticketDetail.current.date}" />
+
+          <!-- to open modification page -->
+          <h:button outcome="./home.xhtml" includeViewParams="true" value="Modify" />
+
+          <!-- to open removing-confirmation dialog -->
+          <h:commandButton action="#{removeAction.confirm(ticketDetail.current)}" value="Remove">
+            <f:ajax immediate="true" render="remove:Form:View" />
+          </h:commandButton>
+
+        </nav>
+
+        <!-- description text of ticket : pre-formatted -->
+        <div id="tabContent1">
+            <pre>
+				<h:outputText id="t-desc" value="#{ticketDetail.current.desc}" escape="false" />
+		    </pre>
+        </div>
+
+      </h:panelGroup>
+    </h:panelGroup>
+
+  </h:form>
+
+  <hr />
+
+  <!-- Ticket Edition page -->
+  <h:form id="editForm">
+
+    <h1>TicketEdition Bean</h1>
+    <div>
+    
+      <h:outputText value="Title : " />
+      <h:inputText id="title" value="#{ticketEdition.ticket.title}" required="true" label="Title">
+        <f:validator validatorId="tfa.Ticket" />
+      </h:inputText>
+      <br/>
+
+      <h:outputText value="Description : " />
+      <h:inputTextarea id="desc" rows="10" value="#{ticketEdition.ticket.desc}" required="true" label="Description">
+        <f:validator validatorId="tfa.Ticket" />
+      </h:inputTextarea>
+      <br/>
+     
+      <h:outputText value="Assign to : " />
+      <h:selectOneMenu id="user" value="#{ticketEdition.ticket.user}">
+        <f:selectItems value="#{ticketDetail.users}" var="u" itemValue="#{u.ident}" itemLabel="#{u.fullName}" />
+      </h:selectOneMenu>
+      <br/>
+       
+      <h:outputText value="Status : " />
+      <h:selectOneMenu id="status" value="#{ticketEdition.ticket.status}">
+        <f:selectItems value="#{ticketDetail.status}" var="s" itemValue="#{s}" itemLabel="#{s}" />
+      </h:selectOneMenu>
+   
+    </div>
+
+    <!-- buttons bar -->
+    <div>
+      <h:messages class="errorMsg" />
+      <hr />
+      <h:panelGrid columns="2">
+        <h:commandButton action="#{ticketEdition.validate}" value="#{ticketEdition.ticket.id==null?'Create':'Update'}" />
+        <h:button outcome="home" value="Cancel" />
+      </h:panelGrid>
+    </div>
+    
+  </h:form>
+
+  <!-- Action group dialog (custom jsf element ) -->
+  <tfa:dialog id="group" title="Action on tickets selection" bean="#{groupAction}" close="Cancel">
+
+    <h1>GroupAction Bean</h1>
+    <p>
+      <h:outputText value="#{groupAction.selection.size()}" /> selected tickets
+    </p>
+
+    <h:selectOneMenu id="action" value="#{groupAction.action}">
+       <f:selectItems value="#{groupAction.actions}" var="a" itemValue="#{a}" itemLabel="#{a}" />
+    </h:selectOneMenu>
+
+    <h:inputText id="user" value="#{groupAction.user}" />
+
+  </tfa:dialog>
+
+  <!-- Removing confirmation dialog -->
+  <tfa:dialog id="remove" title="Removal" bean="#{removeAction}" close="Cancel">
+
+    <h1>RemoveAction Bean</h1>
+    <p>Do you really want to remove the ticket <h:outputText value="#{removeAction.ticket.id}" /> ?</p>
+    <br />
+    <p>( <h:outputText value="#{removeAction.ticket.title}" /> )</p>
+    <br />
+
+  </tfa:dialog>
+
+</h:body>
+
+</html>
+

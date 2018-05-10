@@ -1,0 +1,64 @@
+/* ---- Parameters------------------------------------------------------- */
+/* LAYOUT Dimensions : see template and home.xmhtl */
+/* ticketsTable.pageSize lines for list */
+/* ---- Layout  --------------------------------------------------------- */
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  padding-left: 20px;
+}
+/* full page control with scroll bar */
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+#header {
+  height: 54px;
+  overflow: hidden;
+}
+#wrapper {
+  min-width: 600px;
+  min-height: 0px;
+  height: calc(100% - 72px);
+}
+#aside {
+  float: left;
+  height: 100%;
+  width: 150px;
+  overflow: hidden;
+}
+#main {
+  float: right;
+  width: calc(100% - 154px);
+  height: 100%;
+  overflow: hidden;
+}
+#footer {
+  height: 18px;
+  overflow: hidden;
+}
+/* basic template content */
+.full_h {
+  height: 100%;
+}
+/* simple template content, with margin and scrollbar */
+.simple {
+  padding: 25px;
+  overflow-y: scroll;
+  height: calc(100% - 50px);
+}
+/* ticket form as template content */
+#tf\:list {
+  width: 100%;
+  height: 230px;
+}
+#tf\:detail {
+  width: 100%;
+  height: calc(100% - 234px);
+}
+/* ---------------------------------------------------------------------------- */
+

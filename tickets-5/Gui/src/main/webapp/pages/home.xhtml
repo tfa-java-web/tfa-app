@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<!-- Main page, based on template -->
+
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:tfa="http://java.sun.com/jsf/composite/tfa">
+
+    <f:metadata>
+        <!-- parameter : id of selected ticket -->
+        <f:viewParam name="id" value="#{ticketDetail.param}" />
+    </f:metadata>
+
+    <!-- specific definitions to place into header -->
+    <ui:define name="definitions">
+        <h:outputStylesheet name="css/table.css" />
+        <h:outputStylesheet name="css/tabbed.css" />
+        <h:outputStylesheet name="css/detail.css" />
+    </ui:define>
+
+    <!-- main panel of the page -->
+    <ui:define name="content">
+
+        <!-- Form for "liste and detail of selected ticket" management-->
+        <h:form id="tf" class="full_h">
+            <ui:include src="panels/list.xhtml" />
+            <ui:include src="panels/detail.xhtml" />
+        </h:form>
+
+    </ui:define>
+
+    <!-- the dialogs usable in this page -->
+    <ui:define name="dialogs">
+
+        <!-- 1st dialog : actions on tickets' group selected -->
+        <tfa:dialog id="group" title="Action on tickets selection" bean="#{groupAction}" close="Cancel">
+
+            <p>
+                <h:outputText value="#{groupAction.selection.size()}" /> selected tickets
+            </p>
+
+            <h:panelGroup layout="block" style="margin:10px">
+
+                <h:selectOneMenu id="action" value="#{groupAction.action}">
+                    <f:selectItem itemValue="Unselect" />
+                    <f:selectItem itemValue="Close" />
+                    <f:selectItem itemValue="Assign" />
+                    <f:selectItem itemValue="Remove" />
+                </h:selectOneMenu>
+
+                <h:inputText id="user" value="#{groupAction.user}" style="margin-left:10px" />
+                
+            </h:panelGroup>
+            
+        </tfa:dialog>
+
+        <!-- 2nd dialog : warning before removing of current ticket -->
+        <tfa:dialog id="remove" title="Removal" bean="#{removeAction}" close="Cancel">
+
+            <p>
+                Do you really want to remove the ticket
+                <h:outputText value="#{removeAction.ticket.id}" /> ?
+            </p>
+            <br />
+            <p>
+                (<h:outputText value="#{removeAction.ticket.title}" />)
+            </p>
+            <br />
+
+        </tfa:dialog>
+
+    </ui:define>
+
+</ui:composition>

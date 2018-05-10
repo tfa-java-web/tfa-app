@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE xml>
+<configuration>
+
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-5level [%logger{66}] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- TRACE DEBUG INFO WARN ERROR OFF -->
+
+	<!-- Log config file for Tests : all >= debug messages -->
+	<logger name="tfa" level="TRACE" />
+
+	<root level="WARN">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

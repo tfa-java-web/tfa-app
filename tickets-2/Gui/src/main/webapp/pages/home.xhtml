@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+
+	<title>Tickets</title>
+
+	<meta charset="ISO-8859-1" />
+	<link rel="shortcut icon" href="/favicon.png" />
+
+	<meta name="identifier-url" content="http://tfa.onmypc.net/" />
+	<meta name="title" content="The French Author Site" />
+	<meta name="description" content="The French Author Site" />
+	<meta name="abstract" content="The French Author Site" />
+	<meta name="keywords" content="webapp, jsf, jaas" />
+	<meta name="author" content="The French Author" />
+	<meta name="revisit-after" content="15" />
+	<meta name="language" content="EN" />
+	<meta name="copyright" content="© 2016 tfa" />
+	<meta name="robots" content="All" />
+
+	<h:outputStylesheet name="css/theme.css" />
+
+</h:head>
+
+<h:body>
+
+	<p>Hello !</p>
+
+	<!-- Example of JSF dynamic part -->
+	<p>
+		hit count :
+		<h:outputText value="#{hitCountBean.hitCount}" />
+	</p>
+
+	<a href="../rest/hitCount">Click to call rest api : hitCount</a>
+	<hr />
+	<h:graphicImage name="img/mvnmodules.png" />
+
+</h:body>
+
+</html>
+

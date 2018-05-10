@@ -1,0 +1,16 @@
+/* ----- Decorations ---------------------------------------------------------- */
+
+/* global */
+body {
+	font-family: arial;
+	font-size: 13px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+th, td {
+    border: 1px solid lightgrey;
+}

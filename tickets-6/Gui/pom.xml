@@ -1,0 +1,165 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- inherited pom -->
+	<parent>
+		<groupId>tfa</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>tickets</artifactId>
+	</parent>
+
+	<!-- identifier for this module -->
+	<artifactId>tickets-gui</artifactId>
+
+	<!-- packaging for java webapp -->
+	<packaging>war</packaging>
+
+	<description>
+      	An application managing tickets - GUI Layer, build on JSF
+    </description>
+
+	<properties>
+	    <webappdir>${project.basedir}/src/main/webapp</webappdir>
+        <!-- webjars resources versions for filtering -->
+	    <font.awesome.version>4.7.0</font.awesome.version>
+	</properties>
+    
+    <dependencies>
+    
+        <!-- Module dependency : software layer below -->
+        <dependency>
+            <groupId>tfa</groupId>
+            <artifactId>tickets-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+
+	<build>
+
+		<!-- Context root ( http://localhost:8080/tickets ) -->
+		<finalName>/tickets</finalName>
+       
+        <resources>
+            <resource>
+                <!-- webjars resources versions for filtering -->
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <targetPath>${webappdir}/resources</targetPath>
+            </resource>
+        </resources>
+
+     	<plugins>
+	      
+			<!-- Less to css -->
+			<plugin>
+				<groupId>org.lesscss</groupId>
+				<artifactId>lesscss-maven-plugin</artifactId>
+				<version>1.7.0.1.1</version>
+				<configuration>
+					<sourceDirectory>${basedir}/src/main/less</sourceDirectory>
+					<outputDirectory>${webappdir}/resources/css</outputDirectory>
+					<compress>true</compress>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+ 
+  			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<configuration>
+					<!-- deploy the war on my raspberry.pi using PuTTy scp -->
+					<executable>C:\Progra~2\PuTTY\pscp.exe</executable>
+					<arguments>
+						<argument>-i</argument>
+						<argument>C:\Progra~2\PuTTY\pi3.ppk</argument>
+						<argument>${project.build.directory}\${project.build.finalName}.war </argument>
+						<argument>root@raspberry.pi:/opt/jetty9/tickets/webapps/tickets.war</argument>
+					</arguments>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>deploy</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<profiles>
+		<profile>
+
+			<id>embed</id>
+
+			<!-- To build executable war with embedded jetty server -->
+
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+
+			<dependencies>
+
+				<!-- The jetty to embed into war -->
+				<dependency>
+					<groupId>tfa</groupId>
+					<artifactId>tickets-jetty</artifactId>
+					<version>${project.version}</version>
+					<classifier>jar-with-dependencies</classifier>
+					<scope>provided</scope>
+				</dependency>
+
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<archive>
+								<manifest>
+									<!-- The entry point -->
+									<mainClass>tfa.tickets.main.JettyMain</mainClass>
+								</manifest>
+							</archive>
+							<overlays>
+								<!-- Embed jetty module ... -->
+								<overlay>
+									<groupId>tfa</groupId>
+									<artifactId>tickets-jetty</artifactId>
+									<classifier>jar-with-dependencies</classifier>
+									<type>jar</type>
+								</overlay>
+							</overlays>
+							<!-- add suffix .exec.war -->
+							<classifier>exec</classifier>
+						</configuration>
+						<executions>
+							<execution>
+								<id>make-assembly</id>
+								<phase>package</phase>
+								<goals>
+									<goal>war</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

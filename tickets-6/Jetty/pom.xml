@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- inherited pom -->
+	<parent>
+		<groupId>tfa</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>tickets</artifactId>
+	</parent>
+
+	<!-- identifier for this module -->
+	<artifactId>tickets-jetty</artifactId>
+
+	<!-- packaging for jetty embedded overlay -->
+	<packaging>jar</packaging>
+
+	<description>
+      	An application managing tickets - Embedded Jetty
+    </description>
+
+    <properties>
+        <jetty.version>9.4.8.v20171121</jetty.version>
+    </properties>
+    
+	<dependencies>
+
+		<!-- Module provided dependency : for eclipse debug only -->
+
+		<dependency>
+			<groupId>tfa</groupId>
+			<artifactId>tickets-core</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Jetty embedded dependencies -->
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-annotations</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-jaas</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+
+		<!-- No need for now <dependency> <groupId>org.eclipse.jetty</groupId> 
+			<artifactId>jetty-jmx</artifactId> <version>9.4.2.v20170220</version> </dependency> -->
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.0</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Log Jetty on logback -->
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<!-- Package a jetty server, logback, and our main -->
+			<!-- into jar with dependencies, which will be merged -->
+			<!-- into the gui war, with maven war overlay tech -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- The main entry point -->
+							<mainClass>tfa.tickets.main.JettyMain</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>

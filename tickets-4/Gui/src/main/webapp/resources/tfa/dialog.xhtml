@@ -1,0 +1,76 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:cc="http://java.sun.com/jsf/composite" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html">
+
+<!-- My Dialog custom component  -->
+
+<cc:interface>
+
+  <!-- Title displayed for dialog -->
+  <cc:attribute name="title" required="true" />
+  
+  <!-- Bean to manage dialog -->
+  <cc:attribute name="bean" required="true" />
+
+  <!-- Buttons with displayed label -->
+  <cc:attribute name="validate" default="Validate" />
+  <cc:attribute name="close" default="Cancel" />
+
+  <!-- close button simply hide, optional cancel button calls bean.cancel -->
+  <cc:attribute name="cancel" />
+  
+</cc:interface>
+
+<cc:implementation>
+
+  <!-- grey background on all page, default not shown -->
+  <h:panelGroup layout="block" id="Dialog" styleClass="modalDialog">
+
+    <!-- form for dialog management -->
+    <h:form id="Form">
+
+      <!-- title and closing cross -->
+      <div class="dialTitle">
+        <span><h:outputText value="#{cc.attrs.title}" /></span>
+        <input type="button" onclick="hide('#{cc.attrs.id}:Dialog');" value="X" />
+      </div>
+
+      <!-- specific content of dialog -->
+      <h:panelGroup layout="block" id="View" styleClass="dialContent">
+
+        <cc:insertChildren />
+
+        <!-- for showing dialog or not, after action -->
+        <h:outputScript>if (#{cc.attrs.bean.displayed}) show('#{cc.attrs.id}:Dialog'); else hide('#{cc.attrs.id}:Dialog');</h:outputScript>
+
+      </h:panelGroup>
+
+      <!-- buttons bar of 3 max actions : Validate, Cancel, Close -->
+      <div class="dialFooter">
+        <hr />
+        <h:panelGrid class="buttons" columns="3">
+
+          <h:commandButton rendered="#{cc.attrs.validate!=null}" action="#{cc.attrs.bean.validate}" class="button-ok" value="#{cc.attrs.validate}">
+            <!-- Validate refresh all the page (no ajax), after action -->
+          </h:commandButton>
+
+          <h:commandButton rendered="#{cc.attrs.cancel!=null}" action="#{cc.attrs.bean.cancel}" class="button-ko"  value="#{cc.attrs.cancel}">
+            <!-- Cancel refresh nothing (except dialog content), after action -->
+            <f:ajax immediate="true" render="Form:View" />
+          </h:commandButton>
+
+          <h:panelGroup rendered="#{cc.attrs.close!=null}">
+            <!-- Close refresh nothing, without action -->
+            <input type="reset" onclick="hide('#{cc.attrs.id}:Dialog');" value="#{cc.attrs.close}" />
+          </h:panelGroup>
+
+        </h:panelGrid>
+      </div>
+
+    </h:form>
+
+  </h:panelGroup>
+
+</cc:implementation>
+
+</html>

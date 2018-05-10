@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- For wildfly -->
+
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<deployment>	
+	    <exclusions>
+	      <!-- for using slf4j and logback in my application -->
+	      <module name="org.slf4j" />
+	      <module name="org.slf4j.impl" />
+	    </exclusions>
+	</deployment>
+
+<!-- Section of wildfly / standalone / configuration / standalone.xml -->
+<!-- to put in place of the original, for well logging with logback   -->
+<!-- 
+        <subsystem xmlns="urn:jboss:domain:logging:3.0">
+        
+            <console-handler name="CONSOLE">
+                <filter-spec value="levelRange[FINEST,INFO]"/>
+                <formatter>
+                    <named-formatter name="DEV-PATTERN"/>
+                </formatter>
+            </console-handler>
+            <console-handler name="STDERR">
+                <level name="WARN"/>
+                <formatter>
+                    <named-formatter name="DEV-PATTERN"/>
+                </formatter>
+                <target name="System.err"/>
+            </console-handler>
+            <console-handler name="JUST-PRINT">
+                <formatter>
+                    <named-formatter name="SIMPLE-PATTERN"/>
+                </formatter>
+            </console-handler>
+            <console-handler name="JUST-PRINT-ERR">
+                <formatter>
+                    <named-formatter name="SIMPLE-PATTERN"/>
+                </formatter>
+                 <target name="System.err"/>
+           </console-handler>
+            
+            <periodic-rotating-file-handler name="FILE" autoflush="true">
+                <formatter>
+                    <named-formatter name="PATTERN"/>
+                </formatter>
+                <file relative-to="jboss.server.log.dir" path="server.log"/>
+                <suffix value=".yyyy-MM-dd"/>
+                <append value="true"/>
+            </periodic-rotating-file-handler>
+         
+            <logger category="stdout" use-parent-handlers="false">
+                <handlers>
+                    <handler name="JUST-PRINT"/>
+                </handlers>
+            </logger>
+            <logger category="stderr" use-parent-handlers="false">
+                <handlers>
+                    <handler name="JUST-PRINT-ERR"/>
+                </handlers>
+            </logger>
+            
+            <logger category="org.jboss.as.server">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.jboss.as.naming">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.jboss.as.domain">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.jboss.as.protocol">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.wildfly.extension.undertow">
+                <level name="WARN"/>
+            </logger>
+            <logger category="org.jboss.as.domain.http.api.undertow">
+                <level name="ERROR"/>
+            </logger>
+            <logger category="org.jboss.as">
+                <level name="INFO"/>
+                <filter-spec value="match(&quot;Core&quot;)"/>
+            </logger>
+
+            <root-logger>
+                <level name="WARN"/>
+                <handlers>
+                    <handler name="CONSOLE"/>
+                    <handler name="STDERR"/>
+                </handlers>
+            </root-logger>
+            
+            <formatter name="SIMPLE-PATTERN">
+                <pattern-formatter pattern="%s"/>
+            </formatter>
+            <formatter name="DEV-PATTERN">
+                <pattern-formatter pattern="%d{HH:mm:ss.SSS} %-5p [%c] (%t) %s%e%n"/>
+            </formatter>
+            <formatter name="PATTERN">
+                <pattern-formatter pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%c] (%t) %s%e%n"/>
+            </formatter>
+            
+        </subsystem>
+-->
+</jboss-deployment-structure>
+

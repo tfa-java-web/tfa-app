@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<!-- List (table) of 10 displayed tickets -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:panelGroup layout="block" id="list" styleClass="list">
+
+        <!-- table, with rowClick-js return to jsf-rowAction above -->
+        <h:dataTable id="tickets" value="#{ticketsTable.list}" var="o" styleClass="mytable" rowClasses="rowClass"
+            onclick="return rowClick(event);" rows="#{ticketsTable.pageSize}">
+
+            <!-- id of ticket, with sort, action on selected group -->
+            <h:column>
+
+                <f:facet name="header">
+
+                    <!-- header button, sort on id -->
+                    <h:commandLink action="#{ticketsTable.sort('id')}">
+                        <i class="fa fa-hashtag" />
+                        <f:ajax immediate="true" render="@form" />
+                    </h:commandLink>
+
+                    <!-- header button, action on selected group -->
+                    <h:commandLink id="groupAction" action="#{groupAction.actionChoice(ticketsTable.selection)}" >
+                       <i style="padding-left:5px; padding-right:5px; color: #ff00ff;" class="fa fa-ellipsis-v"/>
+                        <f:ajax execute="tf:tickets" render="group:Form:View" />
+                    </h:commandLink>
+
+                </f:facet>
+
+                <!-- hidden action on row click : display detail of ticket -->
+                <h:commandLink id="rowAction" action="#{ticketsTable.click}">
+                    <f:ajax immediate="true" render="tf:detail" />
+                </h:commandLink>
+
+                <!-- hidden toggles : memorize id of selected displayed tickets -->
+                <h:selectBooleanCheckbox style="display:none;" id="tg" value="#{ticketsTable.selected}" />
+
+                <!-- id of tickets , associated ( for) to the toggles -->
+                <h:outputLabel style="text-align: right;" for="tg" value="#{o.id}" />
+
+            </h:column>
+
+            <!-- status of ticket, with sort -->
+            <h:column>
+
+                <f:facet name="header">
+                    <h:commandLink action="#{ticketsTable.sort('status')}">
+                        <i class="fa fa-tag" />
+                        <f:ajax immediate="true" render="@form" />
+                    </h:commandLink>
+                </f:facet>
+
+                <!-- display status string , with style for coloration -->
+                <h:panelGroup styleClass="#{(o.status.isEmpty()?'':'label')} #{o.status}">
+                    <h:outputText value="#{(o.status.isEmpty()?'&#160;':o.status)}" />
+                </h:panelGroup>
+
+            </h:column>
+
+            <!-- assigned person, with sort -->
+            <h:column>
+
+                <f:facet name="header">
+                    <h:commandLink action="#{ticketsTable.sort('user')}">
+                        <i class="fa fa-user" />
+                        <f:ajax immediate="true" render="@form" />
+                    </h:commandLink>
+                </f:facet>
+
+                <h:outputText value="#{o.user}" />
+
+            </h:column>
+
+            <!-- last modification date of ticket, with sort -->
+            <h:column>
+
+                <f:facet name="header">
+                    <h:commandLink action="#{ticketsTable.sort('date')}">
+                        <i class="fa fa-calendar" />
+                        <f:ajax immediate="true" render="@form" />
+                    </h:commandLink>
+                </f:facet>
+
+                <h:outputText value="#{o.date}">
+                    <f:convertDateTime pattern="dd MMM" />
+                </h:outputText>
+
+            </h:column>
+
+            <!-- title of ticket, without sort -->
+            <h:column>
+
+                <f:facet name="header">
+                
+                    <!-- the I of Information is the icon -->
+                    <span style="float: left;"> <i class="fa fa-info" /> nformation</span>
+
+                    <!-- buttons next/prev page  at the right -->
+                    <span style="float: right; font-weight: normal;"> 
+                        <h:commandLink action="#{ticketsTable.prevPage}">
+                            <i class="fa fa-toggle-left" />
+                            <f:ajax execute="tf:tickets" render="@form" />
+                        </h:commandLink> 
+                        <h:outputText value="&#160; #{ticketsTable.page+1} / #{ticketsTable.nbPage} &#160;" /> 
+                        <h:commandLink
+                            action="#{ticketsTable.nextPage}">
+                            <i class="fa fa-toggle-right" />
+                            <f:ajax execute="tf:tickets" render="@form" />
+                        </h:commandLink> 
+                        <h:outputText value="&#160;" />
+                        <!-- &#160 are insecable white space (margin) -->
+                    </span>
+
+                </f:facet>
+
+                <!-- title , with grey truncated description -->
+                <h:outputText value="#{o.title}" />
+                <h:panelGroup styleClass="estompe">
+                    <h:outputText value="#{o.shortDesc.isEmpty()?'&#160;':'&#160;-&#160;'}" />
+                    <h:outputText value="#{o.shortDesc}" />
+                </h:panelGroup>
+
+            </h:column>
+
+            <!-- botton of table : not used , pagination is managed at the head -->
+            <f:facet name="footer">
+                <span></span>
+            </f:facet>
+
+        </h:dataTable>
+
+    </h:panelGroup>
+
+</ui:composition>

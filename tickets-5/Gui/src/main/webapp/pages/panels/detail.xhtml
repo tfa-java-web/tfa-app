@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<!-- part of layout, bottom-right panel : detail of current ticket -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:panelGroup layout="block" id="detail" styleClass="detail">
+
+        <!-- title rounded rectangle -->
+        <div id="rtitle" class="rtitle">
+
+            <!--  prev - next buttons at right -->
+            <span style="float: right;"> 
+                <h:commandLink action="#{ticketsTable.prev}">
+                    <i class="fa fa-toggle-left">&#160;</i>
+                    <f:ajax execute="#{ticketsTable.index==0 ? 'tf:tickets' : ''}"
+                        render="#{ticketsTable.index==0 ? '@form' : 'tf:detail'}" />
+                </h:commandLink> 
+                <h:commandLink action="#{ticketsTable.next}">
+                    <i class="fa fa-toggle-right">&#160;</i>
+                    <f:ajax execute="#{ticketsTable.index==(ticketsTable.pageSize-1) ? 'tf:tickets' : ''}"
+                        render="#{ticketsTable.index==(ticketsTable.pageSize-1) ? '@form' : 'tf:detail'}" />
+                </h:commandLink>
+            </span>
+
+            <!-- id + title -->
+            <h:panelGroup rendered="#{ticketDetail.current != null}">
+                <span id="leid" class="leid"> <h:outputText id="t-id" value="#{ticketDetail.current.id}" /></span>
+                <span id="letitre" class="letitre"> <h:outputText id="t-title" value="#{ticketDetail.current.title}" /></span>
+            </h:panelGroup>
+
+        </div>
+
+        <!-- content of ticket -->
+        <h:panelGroup layout="block" rendered="#{ticketDetail.current != null}">
+
+            <!-- buttons bar -->
+            <nav id="actions" class="actions menu">
+                <ul>
+                    <li>
+                        <span>Assign to :</span> 
+                        <h:selectOneMenu id="assign" value="#{ticketDetail.current.user}">
+                            <f:selectItems value="#{ticketDetail.users}" var="u" itemValue="#{u.ident}" itemLabel="#{u.fullName}" />
+                        </h:selectOneMenu>
+                    </li>
+                    <li><span>Status :</span> 
+                        <h:selectOneMenu id="statut" value="#{ticketDetail.current.status}">
+                            <f:selectItems value="#{ticketDetail.status}" var="s" itemValue="#{s.name}" itemLabelEscaped="false" />
+                        </h:selectOneMenu>
+                    </li>
+                    <li>
+                        <span>Date :</span> <span><h:outputText value="#{ticketDetail.current.date}" /></span>
+                    </li>
+                    <li>
+                        <h:button outcome="./edition.xhtml?id=#{ticketDetail.current.id}" value="Modify" />
+                    </li>
+                    <li>
+                        <h:commandButton action="#{removeAction.confirm(ticketDetail.current)}" value="Remove">
+                            <f:ajax immediate="true" render="remove:Form:View" />
+                        </h:commandButton>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- description panel , scrollable -->
+            <div class="scroll">
+
+                <div>
+                    <!-- html (escape=false) content -->
+                    <pre>
+                        <h:outputText id="t-desc" value="#{ticketDetail.current.desc}" escape="false" />
+                    </pre>
+                </div>
+
+            </div>
+
+        </h:panelGroup>
+    </h:panelGroup>
+
+
+</ui:composition>

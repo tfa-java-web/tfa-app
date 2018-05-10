@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" >
+
+   <ui:define name="content">
+
+      <div class="simple" style="background-color: #F4F4F4">
+
+         <h1>TODO page</h1>
+         <br />
+         <p>Example of upload file...</p>
+
+         <script>
+         /* Validate selected file BEFORE sending it : must be the same as java validateFile */
+         function validate( input, event )
+         {
+        	 var file = null;
+        	 var error = null;
+        	 if ( input.files.length == 1 ) file = input.files[0]; else error = 'select one file';
+             if ( file != null &amp;&amp; file.size > 10*1024000 ) error = 'file too large';
+        	 if ( file != null &amp;&amp; ! file.name.endsWith('.txt') ) error = 'not a .txt file';
+        	 if ( file != null &amp;&amp; ! file.type.endsWith('PLAIN') ) file = 'not a plain text file';
+             if ( error != null ) {
+            	 input.value = null; 
+                 document.getElementById('msg').innerHTML = error;
+                 event.preventDefault();
+                 return false;                         		 
+        	 }
+             document.getElementById('msg').innerHTML = "";
+             return true;
+         }
+         </script>
+         
+         <h:form id="form" enctype="multipart/form-data">
+            <h:inputFile id="file" value="#{uploader.file}" validator="#{uploader.validateFile}" onchange="validate(this,event)" />
+            <h:commandButton value="Upload" action="#{uploader.upload}" />
+         </h:form>
+         
+        <h:messages id="msg" />
+        
+      </div>
+   </ui:define>
+
+</ui:composition>

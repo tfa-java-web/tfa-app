@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+
+	<persistence-unit name="TicketsPUTest" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Entity mapping -->
+        <class>tfa.tickets.entities.Status</class>
+        <class>tfa.tickets.entities.User</class>
+        <class>tfa.tickets.entities.Ticket</class>
+  
+		<properties>
+
+			<!-- Settings for a local H2 (testing) database. -->
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:tickets" />
+			<!-- property name="javax.persistence.jdbc.url" value="jdbc:h2:~/tickets;AUTO_SERVER=TRUE" /> -->
+			<!-- property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp:localhost/~/tickets" / -->
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="sa" />
+					
+			<!-- Begin hibernate.cfg.xml -->
+			
+				<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+				<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+				<property name="hibernate.default_schema" value="PUBLIC" />
+				
+				<!-- Disable second-level cache. --> 
+				<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
+				<property name="hibernate.cache.use_query_cache" value="false" />
+				<property name="hibernate.cache.use_minimal_puts" value="false" />
+				<property name="hibernate.max_fetch_depth" value="3" /> 
+				
+				<!-- Print SQL to stdout. -->
+				<property name="hibernate.show_sql" value="true" />
+				<property name="hibernate.format_sql" value="true" />
+				 
+				<!-- update schema on SessionFactory build, for testing. -->
+				<property name="hibernate.hbm2ddl.auto" value="create" />
+
+			<!-- End hibernate.cfg.xml -->
+
+		</properties>
+
+	</persistence-unit>
+	
+	<persistence-unit name="TicketsPU_IT" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Entity mapping -->
+        <class>tfa.tickets.entities.Status</class>
+        <class>tfa.tickets.entities.User</class>
+        <class>tfa.tickets.entities.Ticket</class>
+  
+		<properties>
+
+			<!-- Settings for a local H2 (testing) database. -->
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/tickets;AUTO_SERVER=TRUE" />
+			<!-- property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp:localhost/~/tickets" / -->
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="sa" />
+					
+			<!-- Begin hibernate.cfg.xml -->
+			
+				<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+				<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+				<property name="hibernate.default_schema" value="PUBLIC" />
+								
+				<!-- Disable Second-level (ehcache) & Query cache. --> 
+				<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
+				<property name="hibernate.cache.use_query_cache" value="false" />
+				<property name="hibernate.cache.use_minimal_puts" value="false" />
+				<property name="hibernate.max_fetch_depth" value="3" /> 
+				
+				<!-- Print SQL to stdout. -->
+				<property name="hibernate.show_sql" value="false" />
+				<property name="hibernate.format_sql" value="false" />
+				
+				<!-- update schema on SessionFactory build, for testing. -->
+				<property name="hibernate.hbm2ddl.auto" value="update" />
+
+			<!-- End hibernate.cfg.xml -->
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
