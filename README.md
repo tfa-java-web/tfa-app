@@ -15,5 +15,6 @@ Build
       mvn install -P embed
       
 Configuration : see /etc
-   Login for tickets application : admin/admin  ou guest/guest
+
+Login for the tickets application : admin/admin  or  guest/guest
                     
