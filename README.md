@@ -3,6 +3,12 @@
 TFA - Java Sources of a full example of Java Web app
 **JSF Application**, well comments, quality sources 
 
+# Vue.js version 
+
+A ***vue.js*** version of GUI is also implemented in step 7.
+To help about choice   JSF server-side   vs     VUE-JS client-side , 
+by comparaison of sources code.
+
 ### Java Sources
 
 Sources : the 6 steps of developpement 
@@ -29,7 +35,11 @@ Sources : the 6 steps of developpement
 - Step 6 - Complete application : Complete the application 
          | JAAS | Authentication | Security roles 
 		 | Service mail | Pdf generation
-	 
+		 
+- Step 7 - Vue.js 2 version : Refactoring | Single Page 
+	 | Debugging Sources Map | Component.vue Packaging | Elcipse configuration
+	 | Asynchronism | Comparison with JSF
+
 ### Docs 
    see https://tfa.onmypc.net   
    
@@ -48,10 +58,4 @@ Sources : the 6 steps of developpement
 		 
 > Note : Login for the tickets application at step 6 : admin/admin  or  guest/guest
                     
-# Vue.js version in progress
-
-A vue.js version of GUI is in progress ... soon.
-To help about choice   JSF server-side   vs     VUE-JS client-side , 
-by comparaison of sources code.
-
 Thanks.
