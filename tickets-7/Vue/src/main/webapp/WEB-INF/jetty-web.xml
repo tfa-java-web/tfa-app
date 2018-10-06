@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- For Jetty only -->
+
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+	<Set name="contextPath">/vues</Set>
+
+	<!-- Weld CDI initialisation
+	<Call name="prependServerClass">
+		<Arg>-org.eclipse.jetty.servlet.FilterHolder</Arg>
+	</Call>
+
+	<Call name="prependServerClass">
+		<Arg>-org.eclipse.jetty.servlet.ServletHolder</Arg>
+	</Call>
+
+	<Call name="prependServerClass">
+		<Arg>-org.eclipse.jetty.server.handler.ContextHandler</Arg>
+	</Call>
+
+	<Call name="prependServerClass">
+		<Arg>-org.eclipse.jetty.servlet.ServletContextHandler</Arg>
+	</Call>
+
+	<Call name="prependServerClass">
+		<Arg>-org.eclipse.jetty.servlet.ServletHandler</Arg>
+	</Call>
+    -->
+
+	<!-- Authentication Management by Jetty Native 
+	<Get name="securityHandler"> 
+		  <Set name="loginService"> 
+		      <New class="org.eclipse.jetty.security.HashLoginService"> 
+		          <Set name="name">TicketRealm</Set> 
+		          <Set name="config"> 
+		              <SystemProperty name="jetty.home" default="../Jetty" />/etc/realm.properties
+		          </Set> 
+		       </New> 
+		</Set> 
+	</Get> -->
+
+	<!-- Authentication Management by Jetty JAAS -->
+	<Get name="securityHandler">
+		<Set name="loginService">
+			<New class="org.eclipse.jetty.jaas.JAASLoginService">
+				<Set name="name">TicketRealm</Set>
+				<Set name="loginModuleName">TicketRealm</Set>
+				<Set name="roleClassNames">
+					<Array type="java.lang.String">
+						<Item>tfa.tickets.auth.TfaRolePrincipal</Item>
+					</Array>
+				</Set>
+			</New>
+		</Set>
+	</Get>
+
+</Configure>
+

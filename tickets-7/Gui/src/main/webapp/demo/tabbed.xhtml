@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" 
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html">
+
+   <!-- tabbed demo page -->
+   
+   <h:head>
+   
+      <title>Tickets</title>
+   
+      <meta charset="ISO-8859-1" />
+      <link rel="shortcut icon" href="../favicon.png" />
+   
+      <h:outputStylesheet name="css/layout.css" />
+      <h:outputStylesheet name="css/splitter.css" />
+      <h:outputStylesheet name="css/tabbed.css" />
+      
+      <h:outputScript name="js/splitter.js" target="body" />
+      <h:outputScript name="js/tabbed.js" target="body" />
+       
+   </h:head>
+   
+   <h:body>
+      
+      <header id="header" style="background-color:orange">
+         <div style="padding:10px">The header</div>
+      </header>  
+   
+      <div id="wrapper">
+   
+         <aside id="aside"  style="background-color:green">
+            <div style="padding:10px">The aside</div>
+         </aside>
+       
+         <div id="vsplitter"  style="background-color:red" />
+       
+         <section id="main" style="background-color:violet"  >
+   
+            <!-- tabs names for switching -->
+            <div class="tabs">
+               <div id="tabA" class="tab tabUnset" onclick="tabChange('A');">All</div>      
+               <div id="tab1" class="tab tabUnset" onclick="tabChange('1');">One</div>      
+               <div id="tab2" class="tab tabUnset" onclick="tabChange('2');">Two</div>      
+               <div id="tab3" class="tab tabUnset" onclick="tabChange('3');">Three</div>      
+               <div id="tab4" class="tab tabUnset" onclick="tabChange('4');">Four</div>      
+               <div id="tab5" class="tab tabUnset" onclick="tabChange('5');">Five</div>      
+            </div> 
+            
+            <!--  tabs contents -->
+            
+            <div id="tabContent1" class="tabContent">
+            <p>Oneeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p>
+            <p>Tabs demo : switch the tabs</p>
+            </div>
+            
+            <div id="tabContent2" class="tabContent">
+            <p>twoooooooooooooo</p>
+            </div>
+            
+            <div id="tabContent3" class="tabContent">
+            <p>threeeeeeeeeeeeeeee</p>
+            </div>
+            
+            <div id="tabContent4" class="tabContent">
+            <p>fourrrrrrrrrrrrrrr</p>
+            </div>
+            
+            <div id="tabContent5" class="tabContent">
+            <p>fiveeeeeeeeeeeeeeeeeee</p>
+            </div>
+         
+         </section>
+   
+      </div>
+   
+      <footer id="footer"  style="background-color:grey">
+         <span  style="padding:10px">The footer</span>
+      </footer>
+   
+   </h:body>
+
+</html>
+

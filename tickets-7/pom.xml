@@ -1,0 +1,258 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<!-- maven pom version -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- nexus identifier for my works -->
+	<groupId>tfa</groupId>
+
+	<!-- nexus identifier for this app -->
+	<artifactId>tickets</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<!-- parent module : pom only -->
+	<packaging>pom</packaging>
+
+	<description>
+      	An application managing tickets - Sources step 7
+    </description>
+
+	<properties>
+
+		<!-- Set your editor ( text editor of eclipse ) to ISO-8859-1 encoding -->
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+
+		<!-- No html javadoc generation by default -->
+		<maven.javadoc.skip>true</maven.javadoc.skip>
+
+		<!-- No sources deploying by default -->
+		<source.skip>true</source.skip>
+
+		<!-- Minimum maven version used -->
+		<maven.version>3.0</maven.version>
+
+        <font-awesome.version>4.7.0</font-awesome.version>
+        
+        <jsf.version>2.2.14</jsf.version>
+    
+	</properties>
+
+	<modules>
+
+		<!-- Software layers -->
+		<module>Base</module>   <!-- persistence, dao , java code -->
+		<module>Core</module>   <!-- application core , java code -->
+        <module>Rest</module>    <!-- application gui , html, css -->
+        <module>Face</module>    <!-- application gui , html, css -->
+		<module>Gui</module>    <!-- application gui , html, css -->
+        <module>Vue</module>    <!-- application gui , html, css -->
+
+		<!-- Optional modules -->
+		<module>Jetty</module>  <!-- application jetty embed main -->
+		<module>Test</module>   <!-- unit & integ tests, junit... -->
+
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<!-- Target code for java >= 8 only -->
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+
+				<!-- Information on builder in war -->
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+							<manifestEntries>
+								<Built-By>tfa</Built-By>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
+
+				<!-- Information on builder in war -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+							<manifestEntries>
+								<Built-By>tfa</Built-By>
+							</manifestEntries>
+						</archive>
+					</configuration>
+				</plugin>
+
+				<!-- All modules of project have same version -->
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+					</configuration>
+				</plugin>
+
+				<!-- Don't deploy modules, by default -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.1</version>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+
+				<!-- To build api's client jar -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.1.0</version>
+			</dependency>
+
+			<!-- JPA avec hibernate et pool/cache c3p0 -->
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>1.0.0.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>5.1.0.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-c3p0</artifactId>
+				<version>5.1.0.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>5.1.0.Final</version>
+			</dependency>
+
+			<!-- RESTFul - json -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>3.0.19.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-servlet-initializer</artifactId>
+				<version>3.0.19.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jackson-provider</artifactId>
+				<version>3.0.19.Final</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-multipart-provider</artifactId>
+                <version>3.0.19.Final</version>
+            </dependency>
+
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-cdi</artifactId>
+				<version>3.0.19.Final</version>
+			</dependency>
+
+            <!-- For java9 jaxb isn't include into -->
+            
+	        <dependency>
+	            <groupId>javax.xml.bind</groupId>
+	            <artifactId>jaxb-api</artifactId>
+	            <version>2.3.0</version>
+	        </dependency>
+
+			<!-- To avoid conflict resteasy / hibernate on this artifact -->
+			<dependency>
+				<groupId>org.jboss.logging</groupId>
+				<artifactId>jboss-logging</artifactId>
+				<version>3.3.0.Final</version>
+			</dependency>
+
+			<!-- H2 database for dev -->
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>1.4.190</version>
+			</dependency>
+
+			<!-- Log on logback, for all library included -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>1.1.7</version>
+			</dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.1.7</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+</project>

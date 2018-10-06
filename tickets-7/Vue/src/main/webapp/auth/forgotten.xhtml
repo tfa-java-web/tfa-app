@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<!-- based on authentication page template  -->
+
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:tfa="http://java.sun.com/jsf/composite/tfa">
+
+    <!-- main panel of the page -->
+    <ui:define name="content">
+
+        <div style="padding: 30px">
+
+            <div class="centerPanel" style="text-align: center; background-color: lightblue">
+
+                <!-- TODO : management of login/password forgotten by any user -->
+                <h2>Forgotten password : Send back To do !</h2>
+                <br />
+                <p>
+                    For now, you can use <b>guest / guest</b> account and password.
+                </p>
+                <br />
+                <hr />
+                <h:panelGrid class="buttons" columns="2">
+                    <h:button outcome="login" class="button-ok" value="Validate" />
+                    <h:button outcome="logout" class="button-ko" value="Cancel" />
+                </h:panelGrid>
+            </div>
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>

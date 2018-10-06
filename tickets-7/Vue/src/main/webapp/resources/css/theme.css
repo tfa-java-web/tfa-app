@@ -1,0 +1,232 @@
+/* ----- Decorations ---------------------------------------------------------- */
+body {
+	font-family: arial;
+	font-size: 13px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+input {
+	padding: 2px 4px 2px 4px;
+}
+
+select {
+	padding: 0px 4px 1px 4px;
+}
+
+textarea {
+	padding: 6px;
+}
+
+option {
+	padding: 1px 4px 1px 4px;
+}
+
+input, textarea, select {
+	border: 1px solid lightgrey;
+}
+
+input:hover, textarea:hover, select:hover {
+	box-shadow: 0px 0px 5px #c8f;
+}
+
+.errorMsg li {
+	margin: 5px;
+	color: red;
+}
+
+.centerPanel {
+	width: 40%;
+	padding: 6px;
+	margin: auto;
+	margin-top: 10%;
+	background-color: #ffd5aa;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	text-align: center;
+}
+
+/*---------- header ------------*/
+#headband {
+	padding: 2px;
+	background-color: #8af;
+}
+
+#logoinfo {
+	padding-left: 3px;
+	font-size: 26px;
+}
+
+#logininfo {
+	padding-right: 6px;
+	padding-top: 9px;
+	font-size: 12px;
+	text-align: center;
+}
+
+/*---------- footer ------------*/
+#footer {
+	background-color: #eee;
+}
+
+#foottext {
+	font-size: 9px;
+	padding-left: 5px;
+}
+
+/*---------- menubar ------------*/
+#menubar {
+	margin: 1px 2px 0px 0px;
+	box-shadow: 1px 1px 3px #000;
+	background-color: #cdf;
+}
+
+#menubar ul li ul {
+	margin-left: 10px;
+	background-color: #cdf;
+	box-shadow: 1px 1px 3px #000;
+}
+
+#menubar a {
+	padding: 3px 5px 2px 5px;
+	margin: 0px;
+}
+
+#menubar a:hover {
+	color: #80f;
+}
+
+/*---------- accordion menu aside ------------*/
+#aside {
+	background-color: #fee2e2;
+}
+
+#accor>div {
+	padding: 1px;
+}
+
+#accor label {
+	margin-left: 3px;
+	padding: 3px 3px 4px 3px;
+}
+
+#accor label i {
+	width: 16px;
+}
+
+#accor a:hover, input+label:hover {
+	color: #80f;
+}
+
+#accor input:checked ~ div a {
+	height: 1.5em;
+	margin-left: 20px;
+	padding: 0px 5px 0px 5px;
+	background-color: #fee2e2;
+	margin-right: 5px;
+}
+
+/*
+#accor input:not (:checked ) +label:hover:after {
+	content: " ...";
+}
+
+#accor input[type='checkbox']:checked+label:hover:after {
+	font-size: 60%;
+	content: " <--";
+}
+*/
+
+/*---------- detail of ticket ------------*/
+
+.detail {
+	padding-left: 5px;
+	padding-right: 1px;
+}
+
+#letitre {
+	color: black;
+	font-weight: bold;
+}
+
+#leid {
+	color: #00d;
+}
+
+#rtitle {
+	margin-top: 5px;
+	padding: 5px 5px 0px 5px;
+	height: 23px;
+	font-size: 125%;
+	background-color: #eee;
+	border-radius: 6px;
+	border-color: #888;
+	border-width: 1px;
+	border-style: solid;
+}
+
+/* 
+#actions ul li ul {
+	margin-left: 6px; 
+	background-color:#eee; 
+	box-shadow: 0px 0px 3px #000; 
+} 
+*/
+#actions select, #actions a, #actions button, #actions span {
+	font-size: 90%;
+	padding: 2px 5px 2px 5px;
+	margin: 0px;
+	border-radius: 4px;
+}
+
+#actions input:hover, #actions a:hover {
+	color: #80f;
+}
+
+/*---------- buttons bars ------------*/
+.buttons {
+	padding: 10px 5px 0px 5px;
+	margin: 0 auto;
+}
+
+.buttons button {
+	border-color: grey;
+	border-width: 2px;
+	border-radius: 4px;
+	margin-left: 10px;
+	padding: 0px 15px 0px 15px;
+	height: 2em;
+	font-weight: bold;
+}
+
+.buttons button:last-child {
+	margin-right: 10px;
+}
+
+.button-ok {
+	background-color: #0f8;
+}
+
+.button-ko {
+	background-color: #fc6;
+}
+
+/*---------- dialog ------------*/
+.dialTitle {
+	margin-bottom: 10px;
+	padding: 3px;
+	background: lightgrey;
+}
+
+.dialTitle span {
+	font-size: 140%;
+}
+
+.dialTitle input {
+	padding: 0px 3px 0px 2px;
+}
+
+

@@ -1,0 +1,331 @@
+/* ----- Decorations ---------------------------------------------------------- */
+body {
+	font-family: arial;
+	font-size: 13px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+input {
+	padding: 2px 4px 2px 4px;
+}
+
+select {
+	padding: 0px 4px 1px 4px;
+}
+
+textarea {
+	padding: 6px;
+}
+
+option {
+	padding: 1px 4px 1px 4px;
+}
+
+input, textarea, select {
+	border: 1px solid lightgrey;
+}
+
+input:hover, textarea:hover, select:hover {
+	box-shadow: 0px 0px 5px #c8f;
+}
+
+.errorMsg li {
+	margin: 5px;
+	color: red;
+}
+
+.centerPanel {
+	width: 40%;
+	padding: 6px;
+	margin: auto;
+	margin-top: 10%;
+	background-color: #ffd5aa;
+	border: 1px solid darkgrey;
+	border-radius: 5px;
+	text-align: center;
+}
+
+/*---------- header ------------*/
+#headband {
+	padding: 2px;
+	background-color: #8af;
+}
+
+#logoinfo {
+	padding-left: 3px;
+	font-size: 26px;
+}
+
+#logininfo {
+	padding-right: 6px;
+	padding-top: 9px;
+	font-size: 12px;
+	text-align: center;
+}
+
+/*---------- footer ------------*/
+#footer {
+	background-color: #eee;
+}
+
+#foottext {
+	font-size: 9px;
+	padding-left: 5px;
+}
+
+/*---------- menubar ------------*/
+#menubar {
+	margin: 1px 2px 0px 0px;
+	box-shadow: 1px 1px 3px #000;
+	background-color: #cdf;
+}
+
+#menubar ul li ul {
+	margin-left: 10px;
+	background-color: #cdf;
+	box-shadow: 1px 1px 3px #000;
+}
+
+#menubar a {
+	padding: 3px 5px 2px 5px;
+	margin: 0px;
+}
+
+#menubar a:hover {
+	color: #80f;
+}
+
+/*---------- accordion menu aside ------------*/
+#aside {
+	background-color: #fee2e2;
+}
+
+#accor>div {
+	padding: 1px;
+}
+
+#accor label {
+	margin-left: 3px;
+	padding: 3px 3px 4px 3px;
+}
+
+#accor label i {
+	width: 16px;
+}
+
+#accor a:hover, input+label:hover {
+	color: #80f;
+}
+
+#accor input:checked ~ div a {
+	height: 1.5em;
+	margin-left: 20px;
+	padding: 0px 5px 0px 5px;
+	background-color: #fee2e2;
+	margin-right: 5px;
+}
+
+/*
+#accor input:not (:checked ) +label:hover:after {
+	content: " ...";
+}
+
+#accor input[type='checkbox']:checked+label:hover:after {
+	font-size: 60%;
+	content: " <--";
+}
+*/
+
+/*---------- list/table of tickets ------------*/
+
+.tf\:list {
+ 	padding: 5px; 
+}
+
+.mytable {
+	height: 200px;
+	cursor: default;
+}
+
+.mytable thead {
+	border-bottom: 1px solid #ccc;
+}
+
+.mytable tbody tr:hover {
+	background-color: #eeeeff;
+}
+
+.mytable tr:nth-child(even) {
+	background-color: #f8f8f8;
+}
+
+.mytable th:nth-of-type(1) {
+	width: 46px;
+	height: 23px;
+}
+
+.mytable th:nth-of-type(2) {
+	width: 65px;
+}
+
+.mytable th:nth-of-type(3) {
+	width: 85px;
+}
+
+.mytable th:nth-of-type(4) {
+	width: 60px;
+}
+
+.mytable th:nth-of-type(5) {
+	width: auto;
+}
+
+.mytable input:checked+label {
+	color: #ff00ff;
+}
+
+.estompe {
+	color: #bbbbbb;
+}
+
+/*---------- detail of ticket ------------*/
+
+.detail {
+	padding-left: 5px;
+	padding-right: 1px;
+}
+
+#letitre {
+	color: black;
+	font-weight: bold;
+}
+
+#leid {
+	color: #00d;
+}
+
+#rtitle {
+	margin-top: 5px;
+	padding: 5px 5px 0px 5px;
+	height: 23px;
+	font-size: 125%;
+	background-color: #eee;
+	border-radius: 6px;
+	border-color: #888;
+	border-width: 1px;
+	border-style: solid;
+}
+
+/* 
+#actions ul li ul {
+	margin-left: 6px; 
+	background-color:#eee; 
+	box-shadow: 0px 0px 3px #000; 
+} 
+*/
+#actions select, #actions a, #actions input, #actions span {
+	font-size: 75%;
+	padding: 2px 5px 2px 5px;
+	margin: 0px;
+	border-radius: 4px;
+}
+
+#actions input:hover, #actions a:hover {
+	color: #80f;
+}
+
+/*---------- buttons bars ------------*/
+.buttons {
+	padding: 10px 5px 0px 5px;
+	margin: 0 auto;
+}
+
+.buttons  input {
+	border-color: grey;
+	border-width: 2px;
+	border-radius: 4px;
+	margin-left: 10px;
+	padding: 0px 15px 0px 15px;
+	height: 2em;
+	font-weight: bold;
+}
+
+.buttons  input:last-child {
+	margin-right: 10px;
+}
+
+.button-ok {
+	background-color: #0f8;
+}
+
+.button-ko {
+	background-color: #fc6;
+}
+
+/*---------- dialog ------------*/
+.dialTitle {
+	margin-bottom: 10px;
+	padding: 3px;
+	background: lightgrey;
+}
+
+.dialTitle span {
+	font-size: 140%;
+}
+
+.dialTitle input {
+	padding: 0px 3px 0px 2px;
+}
+
+/*---------- tickets status  ------------*/
+.label {
+	display: inline;
+	padding: .1em .5em .1em .4em;
+	font-size: 76%;
+	line-height: 1;
+	background-color: lightgrey;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: .1em;
+	border-radius: .5em;
+}
+
+.open {
+	background-color: lightblue;
+}
+
+.feedback {
+	background-color: orange;
+}
+
+.in-progress {
+	background-color: yellow;
+}
+
+.closed {
+	background-color: lightgrey;
+}
+
+.accepted {
+	background-color: #ff8888;
+}
+
+.resolved {
+	background-color: lightgreen;
+}
+
+.suspended {
+	background-color: #dd88dd;
+}
+
+.delivered {
+	background-color: #55dddd;
+}
+
+.validated {
+	background-color: #ff80c0;
+}

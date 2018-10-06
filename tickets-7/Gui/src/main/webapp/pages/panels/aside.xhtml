@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+
+<!-- part of layout : border panel for left menu -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <aside id="aside">
+
+        <!-- accordion left vertical menu -->
+        <nav id="accor" class="accor">
+        
+            <div>
+                <!--  invisible check -->
+                <input id="ac0" type="radio" name="choix" checked="checked" />
+                <!-- 1st level label : icon + string   with direct link -->
+                <label for="ac0"><a href="./home.xhtml"><i class="fa fa-home" />Home</a></label>
+            </div>
+
+            <div>
+                <!--  invisible check -->
+                <input id="ac3" type="radio" name="choix" />
+                <!-- 1st level label : icon + string -->
+                <label for="ac3"><i class="fa fa-flag" /> Status</label>
+                <div>
+                    <!--  submenus -->
+                    <a href="#">Not closed</a> 
+                    <a href="#">Closed</a>
+                </div>
+            </div>
+            <div>
+                <input id="ac1" type="radio" name="choix" />
+                <label for="ac1"><i class="fa fa-hand-paper-o" /> Assigned</label>
+                <div>
+                    <a href="#">To me</a>
+                    <a href="#">The guest</a>
+                    <a href="#">Someone</a>
+                    <a href="#">The french author</a>
+                </div>
+            </div>
+            <div>
+                <input id="ac2" type="radio" name="choix" />
+                <label for="ac2"><i class="fa fa-filter" /> Last date</label>
+                <div>
+                    <a href="#">Today</a> 
+                    <a href="#">This week</a> 
+                    <a href="#">This month</a>
+                </div>
+            </div>
+
+        </nav>
+
+    </aside>
+
+</ui:composition>
