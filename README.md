@@ -9,7 +9,7 @@ by comparaison of sources code.
 
 ### Java Sources
 
-Sources : the 6 steps of developpement 
+Sources : the 7 steps of developpement 
     
 - Step 1 - Structure : Maven modules | Dependencies | Servers 
          | Logging | Running | Configuration | Embed Jetty 
