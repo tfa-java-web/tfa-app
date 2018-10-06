@@ -3,8 +3,6 @@
 TFA - Java Sources of a full example of Java Web app
 **JSF Application**, well comments, quality sources 
 
-# Vue.js version 
-
 A ***vue.js*** version of GUI is also implemented in step 7.
 To help about choice   JSF server-side   vs     VUE-JS client-side , 
 by comparaison of sources code.
