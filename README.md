@@ -35,7 +35,7 @@ Sources : the 7 steps of developpement
 		 | Service mail | Pdf generation
 		 
 - Step 7 - Vue.js 2 version : Refactoring | Single Page 
-	 | Debugging Sources Map | Component.vue Packaging | Elcipse configuration
+	 | Debugging Sources Map | Component.vue | Packaging | Eclipse configuration
 	 | Asynchronism | Comparison with JSF
 
 ### Docs 
@@ -43,7 +43,7 @@ Sources : the 7 steps of developpement
    
 ### Build
 
-   into each tickets-x dir :   mvn clean install , mvn install -P embed
+   into each tickets-x dir :   mvn clean install , mvn install [ -P embed ]
       
 ### Configuration 
 
