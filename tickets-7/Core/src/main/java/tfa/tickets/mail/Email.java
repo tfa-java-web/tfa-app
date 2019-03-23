@@ -16,7 +16,11 @@ public class Email implements Serializable
     private String from = null;
     private String[] to = null;
     private String[] filenames = null;
-
+    
+    public Email()
+    {
+    }
+    
     public Email(String subject, String text)
     {
         super();
