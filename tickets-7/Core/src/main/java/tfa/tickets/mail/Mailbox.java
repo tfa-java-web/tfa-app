@@ -278,6 +278,7 @@ public class Mailbox
                 Message message = messages[i];
 
                 // Subject, from address
+                emails[nb] = new Email();
                 emails[nb].setSubject(message.getSubject());
                 emails[nb].setFrom(message.getFrom()[0].toString());
 
